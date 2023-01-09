@@ -10,10 +10,25 @@ const wallet = () => {
             console.log('error:', e);
         }
     }
+    let walletInstall = () => {
+        try {
+            const deepLink = 'https://play.google.com/store/apps/details?id=io.metamask.metamask';
+            //market://details?id=io.metamask.metamask
+            window.location.href = deepLink;
+        } catch (e) {
+            console.log('error:', e);
+        }
+    }
     return (
-        <div>
-            <button onClick={walletConnection}>connect to metamask</button>
-        </div>
+        <>
+            <div>
+                <button onClick={walletConnection}>connect to metamask</button>
+            </div>
+            <div>
+                <button onClick={walletInstall}>install metamask</button>
+            </div>
+        </>
+
     );
 }
 

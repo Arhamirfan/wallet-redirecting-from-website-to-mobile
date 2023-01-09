@@ -8,28 +8,18 @@ const wallet = () => {
             // window.location.href = deepLink;
             // window.open('https://metamask.app.link/', '_blank');
             if (window.ethereum) {
-                // Request the user to connect their MetaMask account
-                await window.ethereum.enable();
-
-                // Initialize the Web3 object using the injected provider
                 const web3 = new Web3(window.ethereum);
-
-                // Get the user's account
-                const accounts = await web3.eth.getAccounts();
-                const address = accounts[0];
-
-                // Validate the address (optional)
-                if (web3.utils.isAddress(address)) {
-                    console.log(`The user's address is ${address}`);
-                    alert(`The user's address is ${address}`)
+                if (web3.currentProvider.isMetaMask) {
+                    window.ethereum.enable().then(() => {
+                        setAccount(web3.eth.getAccounts().then(accounts => accounts[0]));
+                    });
                 } else {
-                    console.error(`Invalid address: ${address}`);
-                    alert(`Invalid address ${address}`)
+                    web3.currentProvider.openMetaMask().then(() => {
+                        window.ethereum.enable().then(() => {
+                            setAccount(web3.eth.getAccounts().then(accounts => accounts[0]));
+                        });
+                    });
                 }
-            } else {
-                // Open MetaMask on mobile
-                const metamaskUrl = 'https://metamask.io';
-                window.open(metamaskUrl, '_blank');
             }
         } catch (e) {
             console.log('error:', e);

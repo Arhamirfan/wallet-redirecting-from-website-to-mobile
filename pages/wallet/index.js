@@ -1,6 +1,6 @@
-const [account, setAccount] = useState(null);
 import React, { useState, useEffect } from 'react';
 const wallet = () => {
+    const [account, setAccount] = useState('');
     let walletConnection = async () => {
         try {
             // const deepLink = 'intent://scan/#Intent;package=io.metamask.metamask;scheme=metamask;end';

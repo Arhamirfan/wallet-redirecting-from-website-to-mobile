@@ -1,4 +1,5 @@
-
+const [account, setAccount] = useState(null);
+import React, { useState, useEffect } from 'react';
 const wallet = () => {
     let walletConnection = async () => {
         try {
@@ -42,6 +43,13 @@ const wallet = () => {
             {/* <div>
                 <button onClick={walletInstall}>install metamask</button>
             </div> */}
+            <div>
+                {account ? (
+                    <p>Your Ethereum address: {account}</p>
+                ) : (
+                    <p>Please install MetaMask to use this feature</p>
+                )}
+            </div>
         </>
 
     );
